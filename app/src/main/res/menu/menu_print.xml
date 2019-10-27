@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_print"
+        android:orderInCategory="100"
+        android:title="打印"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_ticket"
+        android:orderInCategory="100"
+        android:title="小票预览"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_find_serial"
+        android:orderInCategory="100"
+        android:title="找串口"
+        app:showAsAction="ifRoom" />
+
+</menu>
