@@ -44,6 +44,7 @@ public class PrintTask implements Runnable {
                 break;
             case NET:
                 PLog.d("网口ip地址:" + request.ip);
+                print = new NetPrint(request);
                 break;
             case USB:
                 PLog.d("usb device id:" + request.deviceId);

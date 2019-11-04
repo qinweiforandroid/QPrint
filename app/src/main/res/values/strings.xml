@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">QPrint</string>
+    <string name="mPrintUsbLabel">usb 打印机</string>
+    <string name="mPrintNetLabel">网口 打印机</string>
+    <string name="mPrintBluetoothLabel">蓝牙 打印机</string>
+
+    <string name="net_print_ip_hint">输入网口打印机ip地址</string>
+    <string name="net_print_mac_hint">输入蓝牙打印机mac地址</string>
+    <string name="net_print_port_hint">输入端口号</string>
+    <string name="net_print_test_print">测试打印</string>
 </resources>

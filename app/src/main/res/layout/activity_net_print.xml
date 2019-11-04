@@ -8,21 +8,22 @@
     android:padding="16dp"
     tools:context=".ui.MainActivity">
 
-    <Button
-        android:id="@+id/mPrintUsbBtn"
+    <EditText
+        android:id="@+id/mNetPrintIpEdt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/mPrintUsbLabel" />
+        android:hint="@string/net_print_ip_hint"
+        android:text="" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/net_print_port_hint"
+        android:text="" />
 
     <Button
-        android:id="@+id/mPrintNetBtn"
+        android:id="@+id/mNetPrintTestBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/mPrintNetLabel" />
-
-    <Button
-        android:id="@+id/mPrintBluetoothBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/mPrintBluetoothLabel" />
+        android:text="@string/net_print_test_print" />
 </LinearLayout>

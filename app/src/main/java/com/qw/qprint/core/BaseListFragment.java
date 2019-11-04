@@ -1,4 +1,4 @@
-package com.qw.qprint;
+package com.qw.qprint.core;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,6 +18,8 @@ import com.qw.framework.widget.pull.BaseViewHolder;
 import com.qw.framework.widget.pull.FooterView;
 import com.qw.framework.widget.pull.IFooter;
 import com.qw.framework.widget.pull.PullRecyclerView;
+import com.qw.qprint.Constants;
+import com.qw.qprint.R;
 
 import java.util.ArrayList;
 

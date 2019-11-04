@@ -16,9 +16,31 @@ import com.qw.print.ticket.TitleRowTicket;
  */
 
 public class TicketPrintUtil {
-    public static void printTest1() {
+    public static void printByUsb() {
         PrintRequest request = new PrintRequest();
         request.type = PrintType.USB;
+        buildRequest(request);
+        PrintManager.getInstance().addPrint(request);
+    }
+
+    public static void printByNet(String ip) {
+        PrintRequest request = new PrintRequest();
+        request.type = PrintType.NET;
+        request.ip = ip;
+        buildRequest(request);
+        PrintManager.getInstance().addPrint(request);
+    }
+
+    public static void printByBluetooth(String macAddress) {
+        PrintRequest request = new PrintRequest();
+        request.type = PrintType.BLUETOOTH;
+        request.macAddress = macAddress;
+        buildRequest(request);
+        PrintManager.getInstance().addPrint(request);
+
+    }
+
+    private static void buildRequest(PrintRequest request) {
         request.setCommandType(PrintConstants.COMMAND_ESC);
         request.deviceId = PrefsAccessor.getInstance(MyApplication.getInstance()).getString(Constants.KEY_PRINT_DEVICE_NAME);
         request.addRowTicket(new TitleRowTicket("美味不用等共享餐厅"));
@@ -135,7 +157,6 @@ public class TicketPrintUtil {
 //        barCode.setAlign(PrintConstants.ALIGN_CENTER);
 //        request.addPrintItem(barCode);
         request.addPrintItem(PrintItem.createCutPager());
-        PrintManager.getInstance().addPrint(request);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.qw.qprint;
+package com.qw.qprint.core;
 
 import android.content.Context;
 import android.os.Bundle;

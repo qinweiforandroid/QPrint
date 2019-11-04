@@ -1,2 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.qw.print" />
+    package="com.qw.print" >
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+</manifest>

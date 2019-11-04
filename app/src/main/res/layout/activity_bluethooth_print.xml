@@ -8,21 +8,16 @@
     android:padding="16dp"
     tools:context=".ui.MainActivity">
 
-    <Button
-        android:id="@+id/mPrintUsbBtn"
+    <EditText
+        android:id="@+id/mBluethoothPrintIpEdt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/mPrintUsbLabel" />
+        android:hint="@string/net_print_mac_hint"
+        android:text="" />
 
     <Button
-        android:id="@+id/mPrintNetBtn"
+        android:id="@+id/mBluethoothPrintTestBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/mPrintNetLabel" />
-
-    <Button
-        android:id="@+id/mPrintBluetoothBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/mPrintBluetoothLabel" />
+        android:text="@string/net_print_test_print" />
 </LinearLayout>

@@ -75,6 +75,8 @@ public class PrintConstants {
     public static final int NO_PERMISSION = 1;
     public static final int NO_FIND_DEVICE = 2;
     public static final int CONNECT_ERROR = 3;
+    public static final int IO = 4;
+    public static final int IP_NOT_BE_NULL = 5;
 
     /**
      * ESC指令

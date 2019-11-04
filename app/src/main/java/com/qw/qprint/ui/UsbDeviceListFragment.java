@@ -1,4 +1,4 @@
-package com.qw.qprint;
+package com.qw.qprint.ui;
 
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -23,6 +23,12 @@ import androidx.annotation.RequiresApi;
 import com.qw.framework.utils.Trace;
 import com.qw.framework.widget.pull.BaseViewHolder;
 import com.qw.framework.widget.pull.PullRecyclerView;
+import com.qw.qprint.Constants;
+import com.qw.qprint.PrefsAccessor;
+import com.qw.qprint.R;
+import com.qw.qprint.TicketPrintUtil;
+import com.qw.qprint.ToastUtil;
+import com.qw.qprint.core.BaseListFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,7 +67,7 @@ public class UsbDeviceListFragment extends BaseListFragment<UsbDevice> {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_print:
-                TicketPrintUtil.printTest1();
+                TicketPrintUtil.printByUsb();
                 break;
             case R.id.action_ticket:
                 break;

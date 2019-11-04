@@ -10,7 +10,7 @@ public interface IPrint {
 
     void connect() throws PrintException;
 
-    boolean write(byte[] bytes);
+    boolean write(byte[] bytes) throws PrintException;
 
     byte[] read(int targetLength) throws PrintException;
 

@@ -21,7 +21,7 @@ import java.util.List;
  * Created by qinwei on 2019/1/2 6:28 PM
  * email: qin.wei@mwee.cn
  */
-public class UsbPrint extends AbstractPrint {
+public class UsbPrint extends AbsPrint {
     private UsbManager usbManager;
     private UsbDevice usbDevice;
     private UsbInterface usbInterface;
@@ -73,7 +73,7 @@ public class UsbPrint extends AbstractPrint {
     }
 
     @Override
-    public boolean write(byte[] bytes) {
+    public boolean write(byte[] bytes) throws PrintException {
         PLog.d("write length:" + bytes.length);
         int result = connection.bulkTransfer(usbEndpointOut, bytes, bytes.length, 500);
         PLog.d("write result:" + result);
