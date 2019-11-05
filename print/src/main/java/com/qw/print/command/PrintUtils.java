@@ -32,17 +32,28 @@ public class PrintUtils {
     /**
      * 打印纸一行最大的字节
      */
-    private static final int LINE_BYTE_SIZE = 48;
+//    private static final int LINE_BYTE_SIZE = 48;
+//    private static final int FL1 = 22;
+//    private static final int FL2 = 8;
+//    private static final int FL3 = 9;
+//    private static final int FL4 = 9;
+//    private static final int TL1 = 24;
+//    private static final int TL2 = 12;
+//    private static final int TL3 = 12;
+//
+//    private static final int T1 = 24;
+//    private static final int T2 = 24;
+    private static final int LINE_BYTE_SIZE = 32;
     private static final int FL1 = 22;
     private static final int FL2 = 8;
     private static final int FL3 = 9;
     private static final int FL4 = 9;
-    private static final int TL1 = 24;
-    private static final int TL2 = 12;
-    private static final int TL3 = 12;
+    private static final int TL1 = 20;
+    private static final int TL2 = 6;
+    private static final int TL3 = 6;
 
-    private static final int T1 = 24;
-    private static final int T2 = 24;
+    private static final int T1 = 16;
+    private static final int T2 = 16;
 
 
     /**
@@ -55,6 +66,7 @@ public class PrintUtils {
      * @return 格式化后字符
      */
     public static String format(String l1, String l2, String l3, String l4) {
+
         StringBuilder sb = new StringBuilder();
         sb.append(l1);
         int l1_l2_space = FL1 + FL2 - getBytesLength(l1) - getBytesLength(l2);
@@ -86,19 +98,33 @@ public class PrintUtils {
      */
     public static String format(String l1, String l2, String l3) {
         StringBuilder sb = new StringBuilder();
-        sb.append(l1);
-        int l1_l2_space = TL1 + TL2 - getBytesLength(l1) - getBytesLength(l2);
-        for (int i = 0; i < l1_l2_space; i++) {
-            sb.append(" ");
+        //根据字节长度进行分组
+        String[] result = SubByteString.getSubedStrings(l1, TL1);
+        int l1_l2_space;
+        int l2_l3_space;
+        for (int i = 0; i < result.length; i++) {
+            l1 = result[i];
+            if (i == 0) {
+                sb.append(l1);
+                //l2，l3不支持换行
+                l1_l2_space = TL1 + TL2 - getBytesLength(l1) - getBytesLength(l2);
+                for (int j = 0; j < l1_l2_space; j++) {
+                    sb.append(" ");
+                }
+                sb.append(l2);
+                l2_l3_space = TL3 - getBytesLength(l3);
+                for (int j = 0; j < l2_l3_space; j++) {
+                    sb.append(" ");
+                }
+                sb.append(l3);
+                continue;
+            }
+            sb.append("\n");
+            sb.append(l1);
         }
-        sb.append(l2);
-        int l2_l3_space = TL3 - getBytesLength(l3);
-        for (int i = 0; i < l2_l3_space; i++) {
-            sb.append(" ");
-        }
-        sb.append(l3);
         return sb.toString();
     }
+
 
     /**
      * 打印两列
