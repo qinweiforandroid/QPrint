@@ -2,6 +2,8 @@ package com.qw.print.core;
 
 import android.text.TextUtils;
 
+import com.qw.print.Constants;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -12,7 +14,7 @@ import java.net.Socket;
  * Created by qinwei on 2019-10-27 21:21
  * email: qinwei_it@163.com
  */
-public class NetPrint extends AbsPrint {
+public class NetPrint extends BasePrint {
     private Socket socket;
     private OutputStream mOutputStream;
     private InputStream mInputStream;
@@ -24,7 +26,7 @@ public class NetPrint extends AbsPrint {
     @Override
     public void checkPrint() throws PrintException {
         if (TextUtils.isEmpty(mRequest.ip)) {
-            throw new PrintException(PrintConstants.IP_NOT_BE_NULL, "打印机ip地址为空");
+            throw new PrintException(Constants.IP_NOT_BE_NULL, "打印机ip地址为空");
         }
         //check 是否属于同一局域网
     }
@@ -37,7 +39,7 @@ public class NetPrint extends AbsPrint {
             mInputStream = socket.getInputStream();
             mOutputStream = socket.getOutputStream();
         } catch (IOException e) {
-            throw new PrintException(PrintConstants.CONNECT_ERROR, e.getMessage());
+            throw new PrintException(Constants.CONNECT_ERROR, e.getMessage());
         }
     }
 
@@ -48,7 +50,7 @@ public class NetPrint extends AbsPrint {
             return true;
         } catch (IOException e) {
             e.printStackTrace();
-            throw new PrintException(PrintConstants.IO, e.getMessage());
+            throw new PrintException(Constants.IO, e.getMessage());
         }
     }
 
@@ -67,7 +69,7 @@ public class NetPrint extends AbsPrint {
             mOutputStream = null;
             socket = null;
         } catch (IOException e) {
-            throw new PrintException(PrintConstants.IO, e.getMessage());
+            throw new PrintException(Constants.IO, e.getMessage());
         }
     }
 }

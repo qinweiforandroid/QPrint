@@ -1,8 +1,8 @@
 package com.qw.print;
 
-import com.qw.print.core.PLog;
 import com.qw.print.core.PrintRequest;
 import com.qw.print.core.PrintTask;
+import com.qw.print.utils.PLog;
 
 import java.util.HashMap;
 import java.util.concurrent.ExecutorService;

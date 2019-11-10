@@ -26,7 +26,7 @@ public class NetPrintActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_net_print);
         mNetPrintIpEdt = (EditText) findViewById(R.id.mNetPrintIpEdt);
-        mNetPrintIpEdt.setText("192.168.31.110");
+        mNetPrintIpEdt.setText("192.168.123.100");
         mNetPrintTestBtn = (Button) findViewById(R.id.mNetPrintTestBtn);
         mNetPrintTestBtn.setOnClickListener(new View.OnClickListener() {
             @Override

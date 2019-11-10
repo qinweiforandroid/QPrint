@@ -26,7 +26,7 @@ public class MyApplication extends Application {
         Trace.setTag("pos");
 
         PrintManager.init(new PrintConfig.Builder(this)
-                .setmMaxPrintTaskSize(3)
+                .setMaxPrintTaskSize(3)
                 .build());
     }
 

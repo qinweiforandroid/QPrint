@@ -1,5 +1,6 @@
 package com.qw.print.core;
 
+import com.qw.print.data.PrintItem;
 import com.qw.print.ticket.BaseRowTicket;
 
 import java.util.ArrayList;
@@ -11,19 +12,33 @@ import java.util.ArrayList;
 
 public class PrintRequest {
     /**
-     * 打印机接口类型
+     * gbk字符占用的宽度，默认是一个全角是2个字符，有些打印机是1.5个字符
      */
-    public PrintType type;
+    private float charSize = 2;
+    /**
+     * 主流的尺寸
+     * 80mm 48
+     * 76mm CPL是42/35
+     * 76mm CPL40/33
+     * 58mm 32
+     */
+    private int pageSize = 48;
 
     /**
      * 小票行集合描述
      */
-    private ArrayList<PrintItem> printItems = new ArrayList<>();
+    private ArrayList<PrintItem> items = new ArrayList<>();
 
     /**
      * 小票行样式集合描述
      */
     private ArrayList<BaseRowTicket> rowTickets = new ArrayList<>();
+
+    /**
+     * 打印机接口类型
+     */
+    public PrinterType type;
+
     /**
      * 打印机指令类型
      */
@@ -34,12 +49,21 @@ public class PrintRequest {
      */
     public String ip;
     /**
-     *
+     * 蓝牙mac地址
      */
     public String macAddress;
+    /**
+     * usb 设备id
+     */
     public String deviceId;
+    /**
+     * 打印tag标记
+     */
     public String tag;
-    public int state;
+    /**
+     * 执行状态
+     */
+    public int state = STATE.IDEL;
 
     public int getCommandType() {
         return commandType;
@@ -49,8 +73,8 @@ public class PrintRequest {
         this.commandType = commandType;
     }
 
-    public ArrayList<PrintItem> getPrintItems() {
-        return printItems;
+    public ArrayList<PrintItem> getItems() {
+        return items;
     }
 
     public ArrayList<BaseRowTicket> getRowTickets() {
@@ -61,8 +85,8 @@ public class PrintRequest {
         this.rowTickets = rowTickets;
     }
 
-    public void addPrintItem(PrintItem item) {
-        printItems.add(item);
+    public void addItem(PrintItem item) {
+        items.add(item);
     }
 
     public void addRowTicket(BaseRowTicket ticket) {

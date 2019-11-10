@@ -1,4 +1,6 @@
-package com.qw.print.core;
+package com.qw.print.command;
+
+import com.qw.print.data.PrintItem;
 
 import java.util.ArrayList;
 

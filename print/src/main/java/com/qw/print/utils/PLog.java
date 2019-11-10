@@ -1,4 +1,4 @@
-package com.qw.print.core;
+package com.qw.print.utils;
 
 import android.util.Log;
 

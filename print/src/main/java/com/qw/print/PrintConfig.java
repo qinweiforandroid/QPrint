@@ -5,6 +5,7 @@ import android.content.Context;
 /**
  * Created by qinwei on 2019-10-27 14:22
  * email: qinwei_it@163.com
+ * @author qinwei
  */
 public class PrintConfig {
     private Context context;
@@ -22,7 +23,7 @@ public class PrintConfig {
         private Context context;
         private int mMaxPrintTaskSize = 3;
 
-        public Builder setmMaxPrintTaskSize(int mMaxPrintTaskSize) {
+        public Builder setMaxPrintTaskSize(int mMaxPrintTaskSize) {
             this.mMaxPrintTaskSize = mMaxPrintTaskSize;
             return this;
         }

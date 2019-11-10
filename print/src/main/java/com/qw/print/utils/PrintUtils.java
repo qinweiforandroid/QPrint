@@ -1,7 +1,9 @@
-package com.qw.print.command;
+package com.qw.print.utils;
 
-import com.qw.print.core.PrintConstants;
-import com.qw.print.core.PrintItem;
+import com.qw.print.data.style.Align;
+import com.qw.print.data.PrintItem;
+import com.qw.print.data.style.Stretch;
+import com.qw.print.data.Style;
 import com.qw.print.ticket.BaseRowTicket;
 import com.qw.print.ticket.FourColumnRowTicket;
 import com.qw.print.ticket.LabelRowTicket;
@@ -21,39 +23,41 @@ public class PrintUtils {
 
 
     public static PrintItem getLabel(String content) {
-        PrintItem item = PrintItem.create();
-        item.setStretchType(PrintConstants.STRETCH_NONE);
-        item.setBold(true);
-        item.setText(content);
-        item.setAlign(PrintConstants.ALIGN_LEFT);
+        PrintItem item = PrintItem.createText(content);
+        item.setStyle(new Style.Builder()
+                .setAlign(Align.LEFT)
+                .setBold(true)
+                .setStretch(Stretch.NONE)
+                .build());
         return item;
     }
 
     /**
      * 打印纸一行最大的字节
      */
-//    private static final int LINE_BYTE_SIZE = 48;
-//    private static final int FL1 = 22;
-//    private static final int FL2 = 8;
-//    private static final int FL3 = 9;
-//    private static final int FL4 = 9;
-//    private static final int TL1 = 24;
-//    private static final int TL2 = 12;
-//    private static final int TL3 = 12;
-//
-//    private static final int T1 = 24;
-//    private static final int T2 = 24;
-    private static final int LINE_BYTE_SIZE = 32;
+    private static final int LINE_BYTE_SIZE = 48;
     private static final int FL1 = 22;
     private static final int FL2 = 8;
     private static final int FL3 = 9;
     private static final int FL4 = 9;
-    private static final int TL1 = 20;
-    private static final int TL2 = 6;
-    private static final int TL3 = 6;
+    private static final int TL1 = 24;
+    private static final int TL2 = 12;
+    private static final int TL3 = 12;
 
-    private static final int T1 = 16;
-    private static final int T2 = 16;
+    private static final int T1 = 24;
+    private static final int T2 = 24;
+
+//    private static final int LINE_BYTE_SIZE = 32;
+//    private static final int FL1 = 22;
+//    private static final int FL2 = 8;
+//    private static final int FL3 = 9;
+//    private static final int FL4 = 9;
+//    private static final int TL1 = 20;
+//    private static final int TL2 = 6;
+//    private static final int TL3 = 6;
+//
+//    private static final int T1 = 16;
+//    private static final int T2 = 16;
 
 
     /**
@@ -172,45 +176,53 @@ public class PrintUtils {
      */
     public static ArrayList<PrintItem> convertPrintItem(ArrayList<BaseRowTicket> rowTickets) {
         ArrayList<PrintItem> printItems = new ArrayList<>();
-        PrintItem p;
+        PrintItem item;
         for (BaseRowTicket row : rowTickets) {
-            p = PrintItem.create();
-            p.setAlign(row.getAlign());
-            p.setStretchType(row.getStretchType());
-            p.setBold(row.isBold());
+            Style style = new Style.Builder()
+                    .setAlign(row.getAlign())
+                    .setBold(row.isBold())
+                    .setStretch(row.getStretchType())
+                    .build();
             switch (row.getType()) {
                 case RowType.TITLE:
                     TitleRowTicket title = (TitleRowTicket) row;
-                    p.setText(title.getTitle());
-                    printItems.add(p);
+                    item = PrintItem.createText(title.getTitle());
+                    item.setStyle(style);
+                    printItems.add(item);
                     break;
                 case RowType.TWO_COLUMN:
                     TwoColumnRowTicket two = (TwoColumnRowTicket) row;
-                    p.setText(PrintUtils.format(two.getText1(), two.getText2()));
-                    printItems.add(p);
+                    item = PrintItem.createText(PrintUtils.format(two.getText1(), two.getText2()));
+                    item.setStyle(style);
+                    printItems.add(item);
                     break;
                 case RowType.THREE_COLUMN:
                     ThreeColumnRowTicket three = (ThreeColumnRowTicket) row;
-                    p.setText(PrintUtils.format(three.getText1(), three.getText2(), three.getText3()));
-                    printItems.add(p);
+                    item = PrintItem.createText(PrintUtils.format(three.getText1(), three.getText2(), three.getText3()));
+                    item.setStyle(style);
+                    printItems.add(item);
                     break;
                 case RowType.FOUR_COLUMN:
                     FourColumnRowTicket four = (FourColumnRowTicket) row;
-                    p.setText(PrintUtils.format(four.getText1(), four.getText2(), four.getText3(), four.getText4()));
-                    printItems.add(p);
+                    item = PrintItem.createText(PrintUtils.format(four.getText1(), four.getText2(), four.getText3(), four.getText4()));
+                    item.setStyle(style);
+                    printItems.add(item);
                     break;
                 case RowType.SINGLE_LINE:
-                    p.setText(PrintUtils.getSingleLine());
-                    printItems.add(p);
+                    item = PrintItem.createText(PrintUtils.getSingleLine());
+                    item.setStyle(style);
+                    printItems.add(item);
                     break;
                 case RowType.DOUBLE_LINE:
-                    p.setText(PrintUtils.getDoubleLine());
-                    printItems.add(p);
+                    item = PrintItem.createText(PrintUtils.getDoubleLine());
+                    item.setStyle(style);
+                    printItems.add(item);
                     break;
                 case RowType.LABEL:
                     LabelRowTicket label = (LabelRowTicket) row;
-                    p.setText(label.getText());
-                    printItems.add(p);
+                    item = PrintItem.createText(label.getText());
+                    item.setStyle(style);
+                    printItems.add(item);
                     break;
                 default:
                     break;

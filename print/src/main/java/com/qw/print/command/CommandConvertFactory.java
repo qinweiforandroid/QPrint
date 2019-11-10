@@ -1,4 +1,6 @@
-package com.qw.print.core;
+package com.qw.print.command;
+
+import com.qw.print.Constants;
 
 /**
  * Created by qinwei on 2019/4/17 2:17 PM
@@ -8,7 +10,7 @@ public class CommandConvertFactory {
     public static ICommandConvert create(int commandType) {
         ICommandConvert convert = null;
         switch (commandType) {
-            case PrintConstants.COMMAND_ESC:
+            case Constants.COMMAND_ESC:
                 convert = new EscCommandConvert();
                 break;
             default:

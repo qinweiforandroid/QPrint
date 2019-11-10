@@ -10,6 +10,8 @@ import android.hardware.usb.UsbManager;
 import android.text.TextUtils;
 
 
+import com.qw.print.utils.PLog;
+import com.qw.print.Constants;
 import com.qw.print.PrintContext;
 
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ import java.util.List;
  * Created by qinwei on 2019/1/2 6:28 PM
  * email: qin.wei@mwee.cn
  */
-public class UsbPrint extends AbsPrint {
+public class UsbPrint extends BasePrint {
     private UsbManager usbManager;
     private UsbDevice usbDevice;
     private UsbInterface usbInterface;
@@ -44,10 +46,10 @@ public class UsbPrint extends AbsPrint {
             }
         }
         if (usbDevice == null) {
-            throw new PrintException(PrintConstants.NO_FIND_DEVICE, "请检查打印机连接");
+            throw new PrintException(Constants.NO_FIND_DEVICE, "请检查打印机连接");
         }
         if (!usbManager.hasPermission(usbDevice)) {
-            throw new PrintException(PrintConstants.NO_PERMISSION, "请先申请权限");
+            throw new PrintException(Constants.NO_PERMISSION, "请先申请权限");
         }
     }
 
@@ -68,7 +70,7 @@ public class UsbPrint extends AbsPrint {
                 }
             }
         } catch (Exception e) {
-            throw new PrintException(PrintConstants.CONNECT_ERROR, e.getMessage());
+            throw new PrintException(Constants.CONNECT_ERROR, e.getMessage());
         }
     }
 

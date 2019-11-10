@@ -4,7 +4,10 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
-import com.qw.print.command.PrintUtils;
+import com.qw.print.utils.PLog;
+import com.qw.print.utils.PrintUtils;
+import com.qw.print.command.CommandConvertFactory;
+import com.qw.print.command.ICommandConvert;
 import com.qw.print.ticket.BaseRowTicket;
 
 import java.util.ArrayList;
@@ -66,11 +69,11 @@ public class PrintTask implements Runnable {
 //                checkPrintStatus();
             ArrayList<BaseRowTicket> rowTickets = request.getRowTickets();
             if (rowTickets.size() > 0) {
-                request.getPrintItems().addAll(0, PrintUtils.convertPrintItem(rowTickets));
+                request.getItems().addAll(0, PrintUtils.convertPrintItem(rowTickets));
             }
             PLog.d("指令转换..");
             ICommandConvert convert = CommandConvertFactory.create(request.getCommandType());
-            byte[] bytes = convert.convert(request.getPrintItems());
+            byte[] bytes = convert.convert(request.getItems());
             PLog.d("指令长度:" + bytes.length);
             PLog.d("开始发送数据..");
             boolean isSuccess = print.write(bytes);

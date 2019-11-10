@@ -1,6 +1,7 @@
 package com.qw.print.ticket;
 
-import com.qw.print.core.PrintConstants;
+import com.qw.print.data.style.Align;
+import com.qw.print.data.style.Stretch;
 
 /**
  * 小票标题样式
@@ -13,8 +14,8 @@ public class TitleRowTicket extends BaseRowTicket {
     public TitleRowTicket(String title) {
         super(RowType.TITLE);
         this.title = title;
-        this.stretchType = PrintConstants.STRETCH_VERTICAL_HORIZONTAL;
-        this.align = PrintConstants.ALIGN_CENTER;
+        this.stretchType = Stretch.BOTH;
+        this.align = Align.CENTER;
     }
 
     public String getTitle() {

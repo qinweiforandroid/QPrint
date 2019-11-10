@@ -6,6 +6,8 @@ import android.bluetooth.BluetoothSocket;
 import android.os.Build;
 import android.text.TextUtils;
 
+import com.qw.print.Constants;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -17,7 +19,7 @@ import java.util.Set;
  * Created by qinwei on 2019-11-04 10:33
  * email: qinwei_it@163.com
  */
-public class BluetoothPrint extends AbsPrint {
+public class BluetoothPrint extends BasePrint {
     private final static String UUID = "00001101-0000-1000-8000-00805f9b34fb";
     private BluetoothDevice mBluetoothDevice;
     private BluetoothSocket mSocket;
@@ -32,7 +34,7 @@ public class BluetoothPrint extends AbsPrint {
     public void checkPrint() throws PrintException {
         List<BluetoothDevice> mDevices = findBluetoothDevices();
         if (mDevices != null) {
-            throw new PrintException(PrintConstants.NO_FIND_DEVICE, "请检查打印机");
+            throw new PrintException(Constants.NO_FIND_DEVICE, "请检查打印机");
         }
         try {
             //首先匹配蓝牙的mac地址
@@ -54,10 +56,10 @@ public class BluetoothPrint extends AbsPrint {
                 }
             }
             if (mBluetoothDevice == null) {
-                throw new PrintException(PrintConstants.NO_FIND_DEVICE, "请检查打印机");
+                throw new PrintException(Constants.NO_FIND_DEVICE, "请检查打印机");
             }
         } catch (Exception e) {
-            throw new PrintException(PrintConstants.NO_FIND_DEVICE, "请检查打印机");
+            throw new PrintException(Constants.NO_FIND_DEVICE, "请检查打印机");
         }
     }
 
@@ -71,7 +73,7 @@ public class BluetoothPrint extends AbsPrint {
             mInputStream = mSocket.getInputStream();
         } catch (IOException e) {
             e.printStackTrace();
-            throw new PrintException(PrintConstants.CONNECT_ERROR, "connect error");
+            throw new PrintException(Constants.CONNECT_ERROR, "connect error");
         }
     }
 
@@ -82,7 +84,7 @@ public class BluetoothPrint extends AbsPrint {
             return true;
         } catch (IOException e) {
             e.printStackTrace();
-            throw new PrintException(PrintConstants.IO, e.getMessage());
+            throw new PrintException(Constants.IO, e.getMessage());
         }
     }
 
@@ -101,7 +103,7 @@ public class BluetoothPrint extends AbsPrint {
             mOutputStream = null;
             mSocket = null;
         } catch (IOException e) {
-            throw new PrintException(PrintConstants.IO, e.getMessage());
+            throw new PrintException(Constants.IO, e.getMessage());
         }
     }
 

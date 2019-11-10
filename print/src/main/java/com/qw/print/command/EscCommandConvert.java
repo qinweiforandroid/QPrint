@@ -1,13 +1,13 @@
-package com.qw.print.core;
+package com.qw.print.command;
 
-import com.qw.print.command.EscCommand;
-import com.qw.print.command.GpUtils;
+import com.qw.print.data.PrintItem;
 
 import java.util.ArrayList;
 
 /**
  * Created by qinwei on 2019/4/17 1:56 PM
  * email: qin.wei@mwee.cn
+ * @author qinwei
  */
 public class EscCommandConvert implements ICommandConvert {
 
@@ -17,22 +17,22 @@ public class EscCommandConvert implements ICommandConvert {
         command.addInitializePrinter();
         for (PrintItem item : items) {
             switch (item.getType()) {
-                case PrintConstants.TYPE_TXT:
+                case TXT:
                     handlerTxt(command, item);
                     break;
-                case PrintConstants.TYPE_CUT:
+                case CUT:
                     command.addCutAndFeedPaper((byte) 10);
                     break;
-                case PrintConstants.TYPE_FEED:
+                case FEED:
                     command.addPrintAndFeedLines((byte) 2);
                     break;
-                case PrintConstants.TYPE_BARCODE:
+                case BARCODE:
                     handlerBarCode(command, item);
                     break;
-                case PrintConstants.TYPE_IMG:
+                case IMG:
                     handlerImage(command, item);
                     break;
-                case PrintConstants.TYPE_QR:
+                case QR:
                     handlerQR(command, item);
                     break;
                 default:
@@ -77,13 +77,13 @@ public class EscCommandConvert implements ICommandConvert {
     private void setAlign(EscCommand command, PrintItem item) {
         //设置对齐方式指令
         switch (item.getAlign()) {
-            case PrintConstants.ALIGN_LEFT:
+            case LEFT:
                 command.addUserCommand(EscCommand.ALIGN_LEFT);
                 break;
-            case PrintConstants.ALIGN_RIGHT:
+            case RIGHT:
                 command.addUserCommand(EscCommand.ALIGN_RIGHT);
                 break;
-            case PrintConstants.ALIGN_CENTER:
+            case CENTER:
                 command.addUserCommand(EscCommand.ALIGN_CENTER);
                 break;
             default:
@@ -95,17 +95,17 @@ public class EscCommandConvert implements ICommandConvert {
     private void handlerTxt(EscCommand command, PrintItem item) {
         setAlign(command, item);
         //设置字体拉伸方式
-        switch (item.getStretchType()) {
-            case PrintConstants.STRETCH_NONE:
+        switch (item.getStretch()) {
+            case NONE:
                 command.addUserCommand(EscCommand.NORMAL);
                 break;
-            case PrintConstants.STRETCH_HORIZONTAL:
+            case HORIZONTAL:
                 command.addUserCommand(EscCommand.DOUBLE_WIDTH);
                 break;
-            case PrintConstants.STRETCH_VERTICAL:
+            case VERTICAL:
                 command.addUserCommand(EscCommand.DOUBLE_HEIGHT);
                 break;
-            case PrintConstants.STRETCH_VERTICAL_HORIZONTAL:
+            case BOTH:
                 command.addUserCommand(EscCommand.DOUBLE_HEIGHT_WIDTH);
                 break;
             default:

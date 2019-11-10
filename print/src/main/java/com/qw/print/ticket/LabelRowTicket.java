@@ -1,5 +1,7 @@
 package com.qw.print.ticket;
 
+import com.qw.print.data.style.Align;
+
 /**
  * Created by qinwei on 2019/4/19 2:05 PM
  * email: qin.wei@mwee.cn
@@ -12,7 +14,7 @@ public class LabelRowTicket extends BaseRowTicket {
         this.text = text;
     }
 
-    public LabelRowTicket(String text, int align, boolean isBold) {
+    public LabelRowTicket(String text, Align align, boolean isBold) {
         super(RowType.LABEL);
         this.text = text;
         this.align = align;
