@@ -6,6 +6,11 @@ import com.qw.print.data.style.Align;
 import com.qw.print.PrintManager;
 import com.qw.print.data.style.Stretch;
 import com.qw.print.data.Style;
+import com.qw.print.ticket.DoubleLineRowTicket;
+import com.qw.print.ticket.LabelRowTicket;
+import com.qw.print.ticket.SingleLineRowTicket;
+import com.qw.print.ticket.ThreeColumnRowTicket;
+import com.qw.print.ticket.TwoColumnRowTicket;
 import com.qw.print.utils.PrintUtils;
 import com.qw.print.Constants;
 import com.qw.print.data.PrintItem;
@@ -33,8 +38,37 @@ public class TicketPrintUtil {
         request.setCommandType(Constants.COMMAND_ESC);
         request.addRowTicket(new TitleRowTicket("DINING ROOM"));
 
-        request.addItem(PrintItem.createFeed());
+//        buildPrintItems(request);
+        buildTickets(request);
+        request.addItem(PrintItem.createCutPager());
+        PrintManager.getInstance().addPrint(request);
+    }
 
+    private static void buildTickets(PrintRequest request) {
+        request.addRowTicket(new LabelRowTicket("", Align.CENTER, false));
+        request.addRowTicket(new TwoColumnRowTicket("Table:19", "Order:201902020001"));
+        request.addRowTicket(new TwoColumnRowTicket("TYPE", "DINE IN"));
+        request.addRowTicket(new DoubleLineRowTicket());
+        request.addRowTicket(new ThreeColumnRowTicket("NAME", "NUM", "PRICE"));
+        request.addRowTicket(new SingleLineRowTicket());
+        request.addRowTicket(new ThreeColumnRowTicket("Sashimi Platter ", "3", "230"));
+        request.addRowTicket(new ThreeColumnRowTicket("  配料A", "", ""));
+        request.addRowTicket(new ThreeColumnRowTicket("  配料B", "", ""));
+        request.addRowTicket(new ThreeColumnRowTicket("Pot Sticker ", "2", "230"));
+        request.addRowTicket(new ThreeColumnRowTicket("Fried Chicken Legs (Spicy Hot)", "4", "230"));
+        request.addRowTicket(new ThreeColumnRowTicket("Chicken Salad", "2", "23"));
+        request.addRowTicket(new DoubleLineRowTicket());
+        request.addRowTicket(new ThreeColumnRowTicket("", "Subtotal", "100"));
+        request.addRowTicket(new ThreeColumnRowTicket("", "tax", "5"));
+        request.addRowTicket(new ThreeColumnRowTicket("", "Tip", "5"));
+        request.addRowTicket(new ThreeColumnRowTicket("", "Total", "105"));
+        request.addRowTicket(new TwoColumnRowTicket("PAY TYPE:", "ONLINE"));
+        request.addRowTicket(new SingleLineRowTicket());
+        request.addRowTicket(new LabelRowTicket("Welcome next time", Align.CENTER, false));
+    }
+
+    public static void buildPrintItems(PrintRequest request) {
+        request.addItem(PrintItem.createFeed());
         PrintItem item = PrintItem.createText(PrintUtils.format("Table:19", "Order:201902020001"));
         item.setStyle(new Style.Builder()
                 .setStretch(Stretch.NONE)
@@ -128,9 +162,6 @@ public class TicketPrintUtil {
                 .setAlign(Align.CENTER)
                 .build());
         request.addItem(item);
-
-        request.addItem(PrintItem.createCutPager());
-        PrintManager.getInstance().addPrint(request);
     }
 
 
